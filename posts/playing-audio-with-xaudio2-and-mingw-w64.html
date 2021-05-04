@@ -1,0 +1,42 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>deadcast.blog - Playing audio with XAudio2 and Mingw-w64</title>
+  </head>
+  <body style="padding:0 15px 0 15px;">
+    <img src="/images/deadcast.jpg" style="float:right;" width="54"/>
+    <h1>deadcast.blog</h1>
+    <a href="/">home</a>
+    <a href="https://github.com/deadcast2">github</a>
+    <a href="mailto:deadcast@sent.com">email</a>
+    (site last updated on 12/31/20)
+    <hr/>
+    <h3>Playing audio with XAudio2 and Mingw-w64</h3>
+    <em>posted on 7/8/18</em>
+    <p>
+      Playing audio using XAudio2 in a very minimal Win32 environment posed more of a challenge than I expected. After finally getting something working I put together a simple project demonstration which you can find here <a href="https://github.com/deadcast2/xaudio2-mingw-w64">https://github.com/deadcast2/xaudio2-mingw-w64</a>.
+    </p>
+    <p>
+      Since I wanted to figure this out using <a href="https://mingw-w64.org/doku.php">Mingw-w64</a> there wasn't much material out there on the web at all. One of the biggest problems I faced was not using the correct XAudio2 header with the compiler supplied XAudio2.8 library due to my own negligence haha. I was using an old one(v2.7) from the DirectX 10 SDK but I ended up locating the correct header that is included in the Windows 8.1 SDK. Which is apart of Visual Studio 2017. Now the header unfortunately wasn't compiling nicely with Mingw-w64 but after a couple very, very minor adjustments it compiled fine. I might get yelled at but I included the modified XAudio2.h header file in the demo project. Also there is a small memmem implementation I found the suited my needs for easily locating a byte sequence in a data buffer.
+    </p>
+    <p>
+      Quick note - you may be thinking why did I not just use the included XAudio2.h header that comes with Mingw-w64? Well as of this writing, it currently does not. It only includes the library. So in the future when Mingw-w64 includes the missing XAudio2.h header then the build process will be easier.
+    </p>
+    <p>
+      Here are the adjustments I made to the Windows 8.1 SDK XAudio2.h file:
+      <ol>
+        <li><img src="/images/posts/playing-audio-with-xaudio2-and-mingw-w64/snippet1.png"/></li>
+        <li><img src="/images/posts/playing-audio-with-xaudio2-and-mingw-w64/snippet2.png"/></li>
+        <li><img src="/images/posts/playing-audio-with-xaudio2-and-mingw-w64/snippet3.png"/></li>
+        <li><img src="/images/posts/playing-audio-with-xaudio2-and-mingw-w64/snippet4.png"/></li>
+      </ol>
+    </p>
+    <p>
+      The demo project is loading a ADPCM encoded, 512 samples per block, 8bit unsigned WAV file from resource but it could easily be adapted to load an audio file from disk. Here's a good example <a href="https://docs.microsoft.com/en-us/windows/desktop/xaudio2/how-to--load-audio-data-files-in-xaudio2">https://docs.microsoft.com/en-us/windows/desktop/xaudio2/how-to--load-audio-data-files-in-xaudio2</a>.
+    </p>
+    <p>
+      The tool I used to encode the WAV file is called AdpcmEncode and more info about it can be found here <a href="https://docs.microsoft.com/en-us/windows/desktop/xaudio2/adpcm-overview">https://docs.microsoft.com/en-us/windows/desktop/xaudio2/adpcm-overview</a>
+    </p>
+    <a href="/index.html">go back</a>
+  </body>
+</html>
