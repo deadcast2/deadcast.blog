@@ -1,0 +1,38 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>deadcast.blog - Bird of the Day</title>
+  </head>
+  <body style="padding:0 15px 0 15px;">
+    <img src="/images/deadcast.jpg" style="float:right;" width="54"/>
+    <h1>deadcast.blog</h1>
+    <a href="/">home</a>
+    <a href="https://github.com/deadcast2">github</a>
+    <a href="mailto:deadcast@sent.com">email</a>
+    (site last updated on 5/7/21)
+    <hr/>
+    <h3>Bird of the Day</h3>
+    <em>posted on 5/7/21</em>
+    <p>
+      I have lots of birds in my yard here in Texas so I was thinking one day how it would be cool if something could tell me roughly how many birds were in my yard chowing down on some of the excellent <a href="https://www.chewy.com/browns-bird-lovers-blend-attract/dp/216162?utm_id=401427328&utm_source=bing&utm_medium=cpc&utm_campaign=Shopping-Product%20Targets-Consumables-SSP-DDG&utm_term=4585581968222739&utm_content=All%20Products">bird seed</a> I buy for them. In the past I've worked with computer vision and machine learning tools so I figured I could put a computer to work to do the hard stuff of monitoring my yard and alerting me when the never-ending-eating-birds were back. I had a few <a href="https://www.raspberrypi.org/products/raspberry-pi-4-model-b/">Raspberry Pis</a> on hand already that would fulfill that role nicely.
+    </p>
+    <p>
+      I began searching for a weather proof case I could purchase to put one of the Pis in but wasn't too successful. I then decided to browse sites that host 3d printable models and found a great case called the <a href="https://pinshape.com/items/7876-3d-printed-rainberry-weatherproof-case-for-raspberry-pi-a-and-pi-camera">RainBerry</a>. Definitely worth the few bucks since I have a 3d printer. Small adjustments were necessary due to the power supply I decided to use. I wanted the viewing device to run on solar. I bought the excellent <a href="https://www.pishop.us/product/pijuice-hat-a-portable-power-platform-for-every-raspberry-pi/">PiJuice</a> along with a PiJuice 12 watt solar panel. I modified the source 3d model files in <a href="https://www.blender.org/">Blender</a> until I had something that fit all of the electronics snugly. Additional parts were required to weather proof the printed case like rubber o-rings and rubber tubing that I acquired from <a href="https://www.mcmaster.com/">McMaster.</a> You can find all of the details <a href="https://tinkererblog.wordpress.com/2015/07/28/how-i-designed-a-compact-weatherproof-raspberry-pi-case/">here</a> on the construction. 
+    </p>
+    <p>Once the case for Raspberry Pi that will be mounted outside was finished I went to work attaching it to my bird house that I already had out in my front yard. It was a good choice for mounting the computer and I attached an extra piece of post that I cut a slight angle out of to secure the solar panel. A few wood screws later and the front yard was all set to start observing birds. The program that I wrote to occasionally snap photos is written in Python and run recurringly via <a href="https://linux.die.net/man/5/crontab">crontab.</a> For the identification of birds in the photo all of that work is done by <a href="https://azure.microsoft.com/en-us/services/cognitive-services/computer-vision/">Azure's Computer Vision Service.</a> An incredibly easy Python library is provided from Microsoft so it didn't take long at all to finish implementing that part of the program. Every 20 seconds a photo is captured, sent to Azure for object detection and then all of the coordinates of birds is returned, if any.</p>
+    <p>With all of the required data I set about constructing the other computer which will be sent all of this bird related info. My Raspberry Pi Zero W board is a great small size computer that will do the work of showing me the bird count. I really like 7 segment displays so I found a <a href="https://www.sparkfun.com/products/11442">super easy to control one</a> from <a href="https://www.sparkfun.com/">SparkFun</a> that I could communicate with via <a href="https://learn.sparkfun.com/tutorials/i2c/all">i2c.</a> Connecting that 7 segment board to the Pi only required a couple wires soldered directly in since this device would be permanent. The software I wrote for this computer was again Python and it too runs recurringly via crontab. It checks every 15 seconds for a bird_count file <a href="https://linux.die.net/man/1/scp">scp'd</a> from the computer outside and then reads that file and sends the number to the 7 segment display. Nothing fancy. Once again I utilized my 3d printer to build a very simple case to house the bird counter.</p>
+    <p>For extra fun when the time reaches 5:00 PM the outside computer randomly selects a photo of birds that was taken earlier, randomly picks a set of saved coordinates for a single bird in the chosen photo, crops to that chosen bird and then transmits the photo to the inside computer which continues to pass it along to Twilio that texts me the photo to my phone. Pretty cool. I deem the selected photo the "Bird of the Day" and store those on my website <a href="/botd">here.</a></p>
+    <p>
+      I enjoyed putting this all together and enjoyed even more finishing it. I may do occasional tweaking to the bird count or computer vision settings to optimize the bird detection in the future. Here are some photos that highlight the project:
+    </p>
+    <ul>
+      <li><a href="/images/posts/bird-of-the-day/IMG_0036.jpg"><img src="/images/posts/bird-of-the-day/IMG_0036_small.jpg"/></a></li>
+      <li><a href="/images/posts/bird-of-the-day/IMG_0037.jpg"><img src="/images/posts/bird-of-the-day/IMG_0037_small.jpg"/></a></li>
+      <li><a href="/images/posts/bird-of-the-day/IMG_0031.jpg"><img src="/images/posts/bird-of-the-day/IMG_0031_small.jpg"/></a></li>
+      <li><a href="/images/posts/bird-of-the-day/IMG_0032.jpg"><img src="/images/posts/bird-of-the-day/IMG_0032_small.jpg"/></a></li>
+      <li><a href="/images/posts/bird-of-the-day/IMG_0029.jpg"><img src="/images/posts/bird-of-the-day/IMG_0029_small.jpg"/></a></li>
+      <li><a href="/images/posts/bird-of-the-day/IMG_0052.jpg"><img src="/images/posts/bird-of-the-day/IMG_0052_small.jpg"/></a></li>
+    </ul>
+    <a href="/index.html">go back</a>
+  </body>
+</html>
