@@ -1,0 +1,30 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>deadcast.blog - Refactorings</title>
+  </head>
+  <body style="padding:0 15px 0 15px;">
+    <img src="/images/deadcast.jpg" style="float:right;" width="54"/>
+    <h1>deadcast.blog</h1>
+    <a href="/">home</a>
+    <a href="https://github.com/deadcast2">github</a>
+    <a href="mailto:deadcast@sent.com">email</a>
+    <a href="/botd">bird of the day</a>
+    (site last updated on 10/29/21)
+    <hr/>
+    <h3>Refactorings</h3>
+    <em>posted on 10/29/21</em>
+    <p>
+      Refactoring is a great skill that I continually practice when writing any software. Once I've finished a new feature or bug fix I then take a little bit of time to see if any improvements could be made to what was written. I look for any method or variable name that could be more precise or for a piece of code that should be extracted or positioned elsewhere. Maybe even a function declaration could be re-worked or the introduction of a new class. Quickly seeing spots for refinement takes a bit of practice, not surprisingly, but one can progress their learning much faster with great published materials like the book <a href="https://martinfowler.com/books/refactoring.html" target="_new">Refactoring</a> by Martin Fowler and Kent Back. There are many fun, interesting refactorings I have completed and I wish to start sharing them. This list will grow over time as I discover new worthy candidates.
+    </p>
+    <ol>
+      <li><p><b>C#</b> - Instead of writing a comment to explain that I'm going to remove all of the HTML content from a string to just gather the text to pass in the POST request I decided to create a new method with a clearly defined function name that performs this operation. Doing so eliminated the need for a comment with the potential to go stale and made a new reusable method.</p>
+      <h5>Before</h5>
+      <img src="/images/posts/refactorings/1_before.png" />
+      <h5>After</h5>
+      <img src="/images/posts/refactorings/1_after.png" />
+      </li>
+    </ol>
+    <a href="/index.html">go back</a>
+  </body>
+</html>
